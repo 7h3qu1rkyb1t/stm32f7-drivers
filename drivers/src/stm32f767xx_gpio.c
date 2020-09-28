@@ -28,10 +28,10 @@ void GPIO_Init(GPIO_Handle_t* PinHandler){
 
     /* alternate function config */
     if(PinHandler->PinConfig.GPIO_PinMode == GPIO_ALTERNATE_FUNCTION){
-        uint8_t pin,port;
-        port = PinHandler->PinConfig.GPIO_PinNumber / 8;
-        pin = PinHandler->PinConfig.GPIO_PinNumber %8;
-        PinHandler->GPIOx->AFRH[port] |= PinHandler->PinConfig.GPIO_PinAltMode << ( pin * 4 );
+        uint8_t AF_reg, pin_reg;
+        AF_reg = PinHandler->PinConfig.GPIO_PinNumber / 8;
+        pin_reg = PinHandler->PinConfig.GPIO_PinNumber %8;
+        PinHandler->GPIOx->AFRH[AF_reg] |= PinHandler->PinConfig.GPIO_PinAltMode << ( pin_reg * 4 );
     }
 }
 

@@ -4,9 +4,13 @@
 void SPI_Init(SPI_Handle_t* pin_handler){
     uint32_t tmp_reg1 = 0;
     uint32_t tmp_reg2 = 0;
-    // enable SPI
-    tmp_reg1 |= (1<< 6);
     // configure the mode
+    if (pin_handler->config.device_mode ){
+        tmp_reg1 |= (1<<2);
+        if (!pin_handler->config.ssm){
+            tmp_reg2 |= (1<<2);
+        }
+    }
     tmp_reg1 |= (pin_handler->config.device_mode << 2);                                      // set bit MSTR master selection
     // bus mode (bidi)
     if (pin_handler->config.bus_config == SPI_Bus_Half_duplex ){
@@ -15,7 +19,7 @@ void SPI_Init(SPI_Handle_t* pin_handler){
         tmp_reg1 |= (1<<10);                                     // configure only for receive only mode.
     }
     // data size set
-    tmp_reg2 |= ((pin_handler->config.ds | 0xf) << 8);          // limit ds to only 16 bit
+    tmp_reg2 |= ((pin_handler->config.ds & 0xf) << 8);          // limit ds to only 16 bit
     // clock phase
     tmp_reg1 |= pin_handler->config.cpha;
     // Clock polarity
@@ -24,8 +28,7 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     tmp_reg1 |= (pin_handler->config.ssm << 9);
     // set baud rate
     tmp_reg1 |= (pin_handler->config.speed << 3);
-    pin_handler->handle->CR1 = tmp_reg1;
-    pin_handler->handle->CR2 = tmp_reg2;
+    pin_handler->handle->CR1 = tmp_reg1|(1<<3);
 }
 
 void SPI_DeInit(SPI_Interfaces interface){
@@ -131,3 +134,17 @@ void SPI_ReceiveData(SPI_I2S_RegDef_t reg, uint8_t* rx_buf, uint32_t size);
 void SPI_irq_config(uint8_t irq_num, uint8_t state);            // SET or RESET state
 void SPI_IRQ_set_priority(uint8_t irq_num, uint32_t priority);
 void SPI_IRQ_Handling(SPI_Handle_t* handle);
+
+// Enable or Disable S
+void SPI_Control(SPI_I2S_RegDef_t* reg_handle, uint8_t state){
+    if (state){
+        reg_handle->CR1 |= (1<<6);
+    } else{
+        reg_handle->CR1 &= ~(1<<6);
+    }
+}
+
+uint32_t SPI_Status(SPI_I2S_RegDef_t* reg_handle, SPI_Status_Flags item){
+	uint32_t value = reg_handle->SR & 1 << item;
+    return value;
+}

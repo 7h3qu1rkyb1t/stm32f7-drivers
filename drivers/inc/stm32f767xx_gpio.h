@@ -40,6 +40,25 @@ typedef enum {
     RCC_GPIOK
 } GPIO_PORTS;
 
+typedef enum {
+    AF0,
+    AF1,
+    AF2,
+    AF3,
+    AF4,
+    AF5,
+    AF6,
+    AF7,
+    AF8,
+    AF9,
+    AF10,
+    AF11,
+    AF12,
+    AF13,
+    AF14,
+    AF15
+} GPIO_Alt_mode;
+
 
 typedef struct {
     uint8_t GPIO_PinNumber;
@@ -47,7 +66,7 @@ typedef struct {
     GPIO_OUTPUT_TYPE GPIO_OPType;
     GPIO_OP_SPEED GPIO_PinSpeed;
     GPIO_PUPDR GPIO_PUPDControl;
-    uint8_t GPIO_PinAltMode;
+    GPIO_Alt_mode GPIO_PinAltMode;
 } GPIO_PinConfig_t;
 
 typedef struct {
@@ -80,4 +99,3 @@ void GPIO_TogglePin(GPIO_RegDef_t* GPIOx, uint8_t pin);
 
 void GPIO_IRQ_Config(uint8_t IRQ_num, uint8_t priority, uint8_t state );
 void GPIO_IRQ_Handler(uint8_t PinNum);
-

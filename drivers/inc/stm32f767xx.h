@@ -2,24 +2,29 @@
 #include<stdint.h>
 
 typedef enum {
+    false,
+    true
+} bool;
+
+typedef enum {
     EXTI_MODE_RISING,
     EXTI_MODE_FALLING,
     EXTI_MODE_BOTH
 }Exti_Trigger_Modes;
 
 typedef enum {
-    PORT_A,
-    PORT_B,
-    PORT_C,
-    PORT_D,
-    PORT_E,
-    PORT_F,
-    PORT_G,
-    PORT_H,
-    PORT_I,
-    PORT_J,
-    PORT_K,
-    NO_PORT                        // incase of using it for interrupts otherthan GPIOs
+    EXTI_PORT_A,
+    EXTI_PORT_B,
+    EXTI_PORT_C,
+    EXTI_PORT_D,
+    EXTI_PORT_E,
+    EXTI_PORT_F,
+    EXTI_PORT_G,
+    EXTI_PORT_H,
+    EXTI_PORT_I,
+    EXTI_PORT_J,
+    EXTI_PORT_K,
+    EXTI_NO_PORT                        // incase of using it for interrupts otherthan GPIOs
 } Exti_ports;
 
 #define SET                     1
@@ -261,12 +266,12 @@ typedef struct {
 #define EXTI                    ((EXTI_RegDef_t *) EXTI_BASEADDR)
 #define SYSCFG                  ((SYSCFG_RegDef_t *) SYSCFG_BASEADDR)
 #define NVIC                    ((NVIC_RegDef_t *) CORTEX_M_PERIPH_BASEADDR)
-#define SPI1                    ((SPI_RegDef_t *) SPI1_BASEADDR)
-#define SPI2                    ((SPI_RegDef_t *) SPI2_BASEADDR)
-#define SPI3                    ((SPI_RegDef_t *) SPI3_BASEADDR)
-#define SPI4                    ((SPI_RegDef_t *) SPI4_BASEADDR)
-#define SPI5                    ((SPI_RegDef_t *) SPI5_BASEADDR)
-#define SPI6                    ((SPI_RegDef_t *) SPI6_BASEADDR)
+#define SPI1                    ((SPI_I2S_RegDef_t *) SPI1_BASEADDR)
+#define SPI2                    ((SPI_I2S_RegDef_t *) SPI2_BASEADDR)
+#define SPI3                    ((SPI_I2S_RegDef_t *) SPI3_BASEADDR)
+#define SPI4                    ((SPI_I2S_RegDef_t *) SPI4_BASEADDR)
+#define SPI5                    ((SPI_I2S_RegDef_t *) SPI5_BASEADDR)
+#define SPI6                    ((SPI_I2S_RegDef_t *) SPI6_BASEADDR)
 
 /**************************** clock control **********************************/
 #define RCC_SYSCFG_Clk_en()     (RCC->APB2ENR |= 1<<14)

@@ -1,6 +1,22 @@
 #include "stm32f767xx.h"
 
 typedef enum {
+    SPI_Status_RXNE     ,
+    SPI_Status_TXE      ,
+    SPI_Status_CHSIDE   ,
+    SPI_Status_UDR      ,
+    SPI_Status_CRC_ERR  ,
+    SPI_Status_MODF     ,
+    SPI_Status_OVR      ,
+    SPI_Status_BSY      ,
+    SPI_Status_FRE      ,
+    SPI_Status_FRLVL_L  ,
+    SPI_Status_FRLVL_H  ,
+    SPI_Status_FTLVL_L  ,
+    SPI_Status_FTLVL_H  ,
+} SPI_Status_Flags;
+
+typedef enum {
     SPI_Mode_Slave,
     SPI_Mode_Master,
 }SPI_Device_mode;
@@ -78,3 +94,7 @@ void SPI_ReceiveData(SPI_I2S_RegDef_t reg, uint8_t* rx_buf, uint32_t size);
 void SPI_irq_config(uint8_t irq_num, uint8_t state);            // SET or RESET state
 void SPI_IRQ_set_priority(uint8_t irq_num, uint32_t priority);
 void SPI_IRQ_Handling(SPI_Handle_t* handle);
+
+// Enable or disable SPI
+void SPI_Control(SPI_I2S_RegDef_t* reg_handle, uint8_t state);
+uint32_t SPI_Status(SPI_I2S_RegDef_t* reg_handle, SPI_Status_Flags item);
