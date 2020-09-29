@@ -1,2 +1,0 @@
-stm32f767xx.c:3:6:exti_init	24	static
-stm32f767xx.c:26:6:IRQ_Configure	24	static

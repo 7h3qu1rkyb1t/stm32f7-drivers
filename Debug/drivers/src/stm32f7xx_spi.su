@@ -1,6 +1,0 @@
-stm32f7xx_spi.c:4:6:SPI_Init	24	static
-stm32f7xx_spi.c:34:6:SPI_DeInit	16	static
-stm32f7xx_spi.c:64:6:RCC_SPI_ClkCtrl	16	static
-stm32f7xx_spi.c:111:6:SPI_SendData	32	static
-stm32f7xx_spi.c:139:6:SPI_Control	16	static
-stm32f7xx_spi.c:147:10:SPI_Status	24	static

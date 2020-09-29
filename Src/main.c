@@ -48,6 +48,11 @@ void gpio_init(){
     spi_mosi.PinConfig.GPIO_OPType = GPIO_PUSHPULL;
     spi_nss.PinConfig.GPIO_OPType = GPIO_PUSHPULL;
 
+    spi_nss.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
+    spi_miso.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
+    spi_mosi.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
+    spi_sck.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
+
     spi_sck.PinConfig.GPIO_PinSpeed =   GPIO_VERY_HIGH_SPEED;
     spi_miso.PinConfig.GPIO_PinSpeed =  GPIO_VERY_HIGH_SPEED;
     spi_mosi.PinConfig.GPIO_PinSpeed =  GPIO_VERY_HIGH_SPEED;
@@ -66,7 +71,7 @@ void spi_init(){
     handler.handle = SPI4;
     handler.config.bus_config = SPI_Bus_Full_duplex;
     handler.config.device_mode = SPI_Mode_Master;
-    handler.config.speed = SPI_pclk_div_by_2;
+    handler.config.speed = SPI_pclk_div_by_8;
     handler.config.cpha = SPI_CPHA_First;
     handler.config.cpol = SPI_CPOL_LOW;
     handler.config.ds = 8;
@@ -81,13 +86,13 @@ int main(void)
     spi_init();
     char buffer[] = "Hello hi";
     uint32_t size = strlen(buffer);
-    SPI_Control(SPI3, SET);
 
 	while(1){
-		SPI_SendData(SPI3, (uint8_t *)buffer, size);
-		while( SPI_Status(SPI3, SPI_Status_BSY) );
-		SPI_Control(SPI3, RESET);
-		for(int i=0; i<1000000; i++);
+        SPI_Control(SPI4, SET);
+		SPI_SendData(SPI4, (uint8_t *)buffer, size);
+		while( SPI_Status(SPI4, SPI_Status_BSY) );
+		SPI_Control(SPI4, RESET);
+		for(int i=0; i<100000; i++);
         __asm__("nop");
 	}
 }

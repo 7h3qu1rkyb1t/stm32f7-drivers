@@ -7,9 +7,10 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     // configure the mode
     if (pin_handler->config.device_mode ){
         tmp_reg1 |= (1<<2);
-        if (!pin_handler->config.ssm){
-            tmp_reg2 |= (1<<2);
-        }
+        tmp_reg2 |= (1<<2);
+    }
+    if (pin_handler->config.ssm){
+        tmp_reg1 |=(1<<9);                                       // ssm bit set
     }
     tmp_reg1 |= (pin_handler->config.device_mode << 2);                                      // set bit MSTR master selection
     // bus mode (bidi)
@@ -19,7 +20,7 @@ void SPI_Init(SPI_Handle_t* pin_handler){
         tmp_reg1 |= (1<<10);                                     // configure only for receive only mode.
     }
     // data size set
-    tmp_reg2 |= ((pin_handler->config.ds & 0xf) << 8);          // limit ds to only 16 bit
+    tmp_reg2 |= (((pin_handler->config.ds-1) & 0xf) << 8);          // limit ds to only 16 bit
     // clock phase
     tmp_reg1 |= pin_handler->config.cpha;
     // Clock polarity
@@ -28,7 +29,10 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     tmp_reg1 |= (pin_handler->config.ssm << 9);
     // set baud rate
     tmp_reg1 |= (pin_handler->config.speed << 3);
-    pin_handler->handle->CR1 = tmp_reg1|(1<<3);
+    // enable NSSP 
+    tmp_reg2 |= (1<<3);
+    pin_handler->handle->CR1 = tmp_reg1;
+    pin_handler->handle->CR2 = tmp_reg2;
 }
 
 void SPI_DeInit(SPI_Interfaces interface){
@@ -74,7 +78,7 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t state){
                 RCC->APB1ENR |= (1<<15);
                 break;
             case RCC_SPI4:
-                RCC->APB2ENR |= (1<<14);
+                RCC->APB2ENR |= (1<<13);
                 break;
             case RCC_SPI5:
                 RCC->APB2ENR |= (1<<20);
@@ -95,7 +99,7 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t state){
                 RCC->APB1ENR &= ~(1<<15);
                 break;
             case RCC_SPI4:
-                RCC->APB2ENR &= ~(1<<14);
+                RCC->APB2ENR &= ~(1<<13);
                 break;
             case RCC_SPI5:
                 RCC->APB2ENR &= ~(1<<20);
@@ -116,8 +120,8 @@ void SPI_SendData(SPI_I2S_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
         while(!(reg->SR & (1<<1)));
         // depending on ds flag send data send data
         // TODO : implement incase of odd number of bits
-        if (ds == 8){
-            reg->DR = *tx_buf;
+        if (ds <= 8){
+            reg->DR = *(uint8_t *)tx_buf;
         } else if (ds == 16){
             reg->DR = *(uint16_t *)tx_buf;
             tx_buf++;
@@ -145,6 +149,6 @@ void SPI_Control(SPI_I2S_RegDef_t* reg_handle, uint8_t state){
 }
 
 uint32_t SPI_Status(SPI_I2S_RegDef_t* reg_handle, SPI_Status_Flags item){
-	uint32_t value = reg_handle->SR & 1 << item;
+	uint32_t value = reg_handle->SR & (1 << item);
     return value;
 }
