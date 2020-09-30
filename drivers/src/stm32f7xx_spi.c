@@ -31,9 +31,11 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     tmp_reg1 |= (pin_handler->config.speed << 3);
     // enable NSSP 
     tmp_reg2 |= (1<<3);
+
     pin_handler->handle->CR1 = tmp_reg1;
     pin_handler->handle->CR2 = tmp_reg2;
 }
+
 
 void SPI_DeInit(SPI_Interfaces interface){
     switch(interface){
@@ -62,6 +64,9 @@ void SPI_DeInit(SPI_Interfaces interface){
             RCC->APB2RSTR &= ~(1<<21);
             break;
     }
+}
+
+void SPI_Config(SPI_Handle_t handler, uint32_t flags){
 }
 
 // clock control
@@ -114,23 +119,23 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t state){
 // Data send and recieve
 void SPI_SendData(SPI_I2S_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
     // chek the buf if empty exit
-    uint8_t ds = (reg->CR2>>8) & 0xf;                       // get ds value
-    while(size){
+    SPI_Control(SPI4, SET);
+    size = size % 2 ? 
+        (size / 2 ) + 1 
+        : size / 2;
+    while(size>0){
         // wait till txe is set
         while(!(reg->SR & (1<<1)));
         // depending on ds flag send data send data
         // TODO : implement incase of odd number of bits
-        if (ds <= 8){
-            reg->DR = *(uint8_t *)tx_buf;
-        } else if (ds == 16){
-            reg->DR = *(uint16_t *)tx_buf;
-            tx_buf++;
-            size--;
-        }
+        reg->DR = *(uint16_t *)tx_buf;
+        tx_buf++;
         tx_buf++;
         size--;
 
     }
+    while( SPI_Status(SPI4, SPI_Status_BSY) );
+    SPI_Control(SPI4, RESET);
 }
 void SPI_ReceiveData(SPI_I2S_RegDef_t reg, uint8_t* rx_buf, uint32_t size);
 
@@ -149,6 +154,14 @@ void SPI_Control(SPI_I2S_RegDef_t* reg_handle, uint8_t state){
 }
 
 uint32_t SPI_Status(SPI_I2S_RegDef_t* reg_handle, SPI_Status_Flags item){
-	uint32_t value = reg_handle->SR & (1 << item);
-    return value;
+    if (item < SPI_Status_FRLVL){
+        return (reg_handle->SR & (1 << item)) >> item;
+    }else{
+        if (item == SPI_Status_FRLVL){
+            return (reg_handle->SR & (0b11 << 9)) >> 9;
+        } else if (item == SPI_Status_FTLVL){
+            return (reg_handle->SR & (0b11 << 11)) >> 11;
+        }
+    }
+    return 0;
 }

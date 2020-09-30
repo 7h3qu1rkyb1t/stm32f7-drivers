@@ -71,7 +71,7 @@ void spi_init(){
     handler.handle = SPI4;
     handler.config.bus_config = SPI_Bus_Full_duplex;
     handler.config.device_mode = SPI_Mode_Master;
-    handler.config.speed = SPI_pclk_div_by_8;
+    handler.config.speed = SPI_pclk_div_by_16;
     handler.config.cpha = SPI_CPHA_First;
     handler.config.cpol = SPI_CPOL_LOW;
     handler.config.ds = 8;
@@ -84,14 +84,11 @@ int main(void)
     gpio_init();
 
     spi_init();
-    char buffer[] = "Hello hi";
+    char buffer[] = "Hello world";
     uint32_t size = strlen(buffer);
 
 	while(1){
-        SPI_Control(SPI4, SET);
 		SPI_SendData(SPI4, (uint8_t *)buffer, size);
-		while( SPI_Status(SPI4, SPI_Status_BSY) );
-		SPI_Control(SPI4, RESET);
 		for(int i=0; i<100000; i++);
         __asm__("nop");
 	}

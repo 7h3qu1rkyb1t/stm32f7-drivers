@@ -1,5 +1,35 @@
 #include "stm32f767xx.h"
 
+
+/* 
+ * spi config flags
+ */
+
+#define SPI_Config_CPHA     (1 << 0 )
+#define SPI_Config_CPOL     (1 << 1 )
+#define SPI_Config_MASTER   (1 << 2 )
+#define SPI_Config_LSB_FST  (1 << 3 )
+#define SPI_Config_SSI      (1 << 4 )
+#define SPI_Config_SSM      (1 << 5 )
+#define SPI_Config_RX_ONLY  (1 << 6 )
+#define SPI_Config_CRC_16B  (1 << 7 )
+#define SPI_Config_CRC_NEXT (1 << 8 )
+#define SPI_Config_CRC_EN   (1 << 9 )
+#define SPI_Config_BIDIOE   (1 << 10)
+#define SPI_Config_BIDIEN   (1 << 11)
+#define SPI_Config_RXDMAEN  (1 << 12)
+#define SPI_Config_TXDMAEN  (1 << 13)
+#define SPI_Config_SSOE     (1 << 14)
+#define SPI_Config_NSSP     (1 << 15)
+#define SPI_Config_FRF      (1 << 16)
+#define SPI_Config_ERRIE    (1 << 17)
+#define SPI_Config_RXNEIE   (1 << 18)
+#define SPI_Config_TXEIE    (1 << 19)
+#define SPI_Config_FRXTH    (1 << 20)
+#define SPI_Config_LDMA_RX  (1 << 21)
+#define SPI_Config_LDMA_TX  (1 << 22)
+
+
 typedef enum {
     SPI_Status_RXNE     ,
     SPI_Status_TXE      ,
@@ -10,10 +40,8 @@ typedef enum {
     SPI_Status_OVR      ,
     SPI_Status_BSY      ,
     SPI_Status_FRE      ,
-    SPI_Status_FRLVL_L  ,
-    SPI_Status_FRLVL_H  ,
-    SPI_Status_FTLVL_L  ,
-    SPI_Status_FTLVL_H  ,
+    SPI_Status_FRLVL    ,
+    SPI_Status_FTLVL    ,
 } SPI_Status_Flags;
 
 typedef enum {
@@ -98,3 +126,10 @@ void SPI_IRQ_Handling(SPI_Handle_t* handle);
 // Enable or disable SPI
 void SPI_Control(SPI_I2S_RegDef_t* reg_handle, uint8_t state);
 uint32_t SPI_Status(SPI_I2S_RegDef_t* reg_handle, SPI_Status_Flags item);
+
+/*
+ * Configure SPI
+ * Should be used after initialization
+ * flags are from enum spi_flags
+ */
+void SPI_Config(SPI_Handle_t handler, uint32_t flags);
