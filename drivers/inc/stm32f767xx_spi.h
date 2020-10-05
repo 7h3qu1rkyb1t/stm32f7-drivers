@@ -116,7 +116,7 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t State);
 
 // Data send and recieve
 void SPI_SendData(SPI_I2S_RegDef_t* reg, uint8_t* tx_buf, uint32_t size);
-void SPI_ReceiveData(SPI_I2S_RegDef_t reg, uint8_t* rx_buf, uint32_t size);
+void SPI_ReceiveData(SPI_I2S_RegDef_t* reg, uint8_t* rx_buf, uint32_t size);
 
 // Interupt handling
 void SPI_irq_config(uint8_t irq_num, uint8_t state);            // SET or RESET state

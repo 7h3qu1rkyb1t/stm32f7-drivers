@@ -21,6 +21,10 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     }
     // data size set
     tmp_reg2 |= (((pin_handler->config.ds-1) & 0xf) << 8);          // limit ds to only 16 bit
+    // frxth level set
+    if (pin_handler->config.ds <=8 ){
+        tmp_reg2 |= (1<<12);
+    }
     // clock phase
     tmp_reg1 |= pin_handler->config.cpha;
     // Clock polarity
@@ -120,24 +124,37 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t state){
 void SPI_SendData(SPI_I2S_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
     // chek the buf if empty exit
     SPI_Control(SPI4, SET);
-    size = size % 2 ? 
-        (size / 2 ) + 1 
-        : size / 2;
+    while(size>1){
+        // wait till txe is set
+        while(!(reg->SR & (1<<1)));
+        reg->DR = *(uint16_t *)tx_buf;
+        tx_buf++;
+        size--;
+    }
+    // if there is still last byte to send
+    if (size){
+        while(!(reg->SR & (1<<1)));
+        *(uint8_t *)&reg->DR = *(uint8_t *)tx_buf;
+    }
+
+    while( SPI_Status(SPI4, SPI_Status_BSY) );
+    SPI_Control(SPI4, RESET);
+}
+void SPI_ReceiveData(SPI_I2S_RegDef_t* reg, uint8_t* rx_buf, uint32_t size){
+    // chek the buf if empty exit
+    SPI_Control(SPI4, SET);
     while(size>0){
         // wait till txe is set
         while(!(reg->SR & (1<<1)));
-        // depending on ds flag send data send data
-        // TODO : implement incase of odd number of bits
-        reg->DR = *(uint16_t *)tx_buf;
-        tx_buf++;
-        tx_buf++;
+        reg->DR = *(uint16_t *)rx_buf;
+        while(!(reg->SR & 1));
+        *(uint16_t *)rx_buf = reg->DR;
         size--;
-
     }
     while( SPI_Status(SPI4, SPI_Status_BSY) );
     SPI_Control(SPI4, RESET);
 }
-void SPI_ReceiveData(SPI_I2S_RegDef_t reg, uint8_t* rx_buf, uint32_t size);
+
 
 // Interupt handling
 void SPI_irq_config(uint8_t irq_num, uint8_t state);            // SET or RESET state

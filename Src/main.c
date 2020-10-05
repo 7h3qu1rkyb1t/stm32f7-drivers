@@ -71,6 +71,7 @@ void spi_init(){
     handler.handle = SPI4;
     handler.config.bus_config = SPI_Bus_Full_duplex;
     handler.config.device_mode = SPI_Mode_Master;
+    // use fpclk/16 for better experience
     handler.config.speed = SPI_pclk_div_by_16;
     handler.config.cpha = SPI_CPHA_First;
     handler.config.cpol = SPI_CPOL_LOW;
@@ -84,7 +85,7 @@ int main(void)
     gpio_init();
 
     spi_init();
-    char buffer[] = "Hello world";
+    char buffer[] = "H";
     uint32_t size = strlen(buffer);
 
 	while(1){
