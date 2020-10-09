@@ -2737,106 +2737,106 @@ void exti_init(Exti_Config_R * config);
 
 // state SET or RESET. priority 4 bits value. lower the num higher priority
 void IRQ_Configure(uint8_t intr, uint8_t state, uint8_t priority);
-#define TIM2                ((TIM_RegDef_t *)         0x40000000)		//General purpose timers
-#define TIM3                ((TIM_RegDef_t *)         0x40000400)		//General purpose timers
-#define TIM4                ((TIM_RegDef_t *)         0x40000800)		//General purpose timers
-#define TIM5                ((TIM_RegDef_t *)         0x40000c00)		//General purpose timers
-#define TIM6                ((TIM_RegDef_t *)         0x40001000)		//Basic timers
-#define TIM7                ((TIM_RegDef_t *)         0x40001400)		//Basic timers
-#define TIM12               ((TIM_RegDef_t *)         0x40001800)		//General purpose timers
-#define TIM13               ((TIM_RegDef_t *)         0x40001c00)		//General-purpose-timers
-#define TIM14               ((TIM_RegDef_t *)         0x40002000)		//General-purpose-timers
-#define LPTIM1              ((LPTIM_RegDef_t *)       0x40002400)		//Low power timer
-#define RTC                 ((RTC_RegDef_t *)         0x40002800)		//Real-time clock
-#define WWDG                ((WWDG_RegDef_t *)        0x40002c00)		//Window watchdog
-#define IWDG                ((IWDG_RegDef_t *)        0x40003000)		//Independent watchdog
-#define CAN3                ((CAN_RegDef_t *)         0x40003400)		//Controller area network
-#define SPI2                ((SPI_RegDef_t *)         0x40003800)		//Serial peripheral interface
-#define SPI3                ((SPI_RegDef_t *)         0x40003c00)		//Serial peripheral interface
-#define SPDIFRX             ((SPDIF_RX_RegDef_t *)    0x40004000)		//Receiver Interface
-#define USART2              ((USART_RegDef_t *)       0x40004400)		//Universal synchronous asynchronous receiver      transmitter
-#define USART3              ((USART_RegDef_t *)       0x40004800)		//Universal synchronous asynchronous receiver      transmitter
-#define UART4               ((USART_RegDef_t *)       0x40004c00)		//Universal synchronous asynchronous receiver      transmitter
-#define UART5               ((USART_RegDef_t *)       0x40005000)		//Universal synchronous asynchronous receiver      transmitter
-#define I2C1                ((I2C_RegDef_t *)         0x40005400)		//Inter-integrated circuit
-#define I2C2                ((I2C_RegDef_t *)         0x40005800)		//Inter-integrated circuit
-#define I2C3                ((I2C_RegDef_t *)         0x40005c00)		//Inter-integrated circuit
-#define I2C4                ((I2C_RegDef_t *)         0x40006000)		//Inter-integrated circuit
-#define CAN1                ((CAN_RegDef_t *)         0x40006400)		//Controller area network
-#define CAN2                ((CAN_RegDef_t *)         0x40006800)		//Controller area network
-#define CEC                 ((CEC_RegDef_t *)         0x40006c00)		//HDMI-CEC controller
-#define PWR                 ((PWR_RegDef_t *)         0x40007000)		//Power control
-#define DAC                 ((DAC_RegDef_t *)         0x40007400)		//Digital-to-analog converter
-#define UART7               ((USART_RegDef_t *)       0x40007800)		//Universal synchronous asynchronous receiver      transmitter
-#define UART8               ((USART_RegDef_t *)       0x40007c00)		//Universal synchronous asynchronous receiver      transmitter
-#define TIM1                ((TIM_RegDef_t *)         0x40010000)		//Advanced-timers
-#define TIM8                ((TIM_RegDef_t *)         0x40010400)		//Advanced-timers
-#define USART1              ((USART_RegDef_t *)       0x40011000)		//Universal synchronous asynchronous receiver      transmitter
-#define USART6              ((USART_RegDef_t *)       0x40011400)		//Universal synchronous asynchronous receiver      transmitter
-#define SDMMC2              ((SDMMC_RegDef_t *)       0x40011c00)		//Secure digital input/output      interface
-#define ADC1                ((ADC_RegDef_t *)         0x40012000)		//Analog-to-digital converter
-#define ADC2                ((ADC_RegDef_t *)         0x40012100)		//Analog-to-digital converter
-#define ADC3                ((ADC_RegDef_t *)         0x40012200)		//Analog-to-digital converter
-#define SDMMC1              ((SDMMC_RegDef_t *)       0x40012c00)		//Secure digital input/output      interface
-#define SPI1                ((SPI_RegDef_t *)         0x40013000)		//Serial peripheral interface
-#define SPI4                ((SPI_RegDef_t *)         0x40013400)		//Serial peripheral interface
-#define SYSCFG              ((SYSCFG_RegDef_t *)      0x40013800)		//System configuration controller
-#define EXTI                ((EXTI_RegDef_t *)        0x40013c00)		//External interrupt/event      controller
-#define TIM9                ((TIM_RegDef_t *)         0x40014000)		//General purpose timers
-#define TIM10               ((TIM_RegDef_t *)         0x40014400)		//General-purpose-timers
-#define TIM11               ((TIM_RegDef_t *)         0x40014800)		//General-purpose-timers
-#define SPI5                ((SPI_RegDef_t *)         0x40015000)		//Serial peripheral interface
-#define SPI6                ((SPI_RegDef_t *)         0x40015400)		//Serial peripheral interface
-#define SAI1                ((SAI_RegDef_t *)         0x40015800)		//Serial audio interface
-#define SAI2                ((SAI_RegDef_t *)         0x40015c00)		//Serial audio interface
-#define LTCD                ((LTDC_RegDef_t *)        0x40016800)		//LCD-TFT Controller
-#define DSI                 ((DSI_RegDef_t *)         0x40016c00)		//DSI Host
-#define DFSDM               ((DFSDM_RegDef_t *)       0x40017400)		//Digital filter for sigma delta      modulators
-#define MDIOS               ((MDIOS_RegDef_t *)       0x40017800)		//Management data input/output slave
-#define GPIOA               ((GPIO_RegDef_t *)        0x40020000)		//General-purpose I/Os
-#define GPIOB               ((GPIO_RegDef_t *)        0x40020400)		//General-purpose I/Os
-#define GPIOC               ((GPIO_RegDef_t *)        0x40020800)		//General-purpose I/Os
-#define GPIOD               ((GPIO_RegDef_t *)        0x40020c00)		//General-purpose I/Os
-#define GPIOE               ((GPIO_RegDef_t *)        0x40021000)		//General-purpose I/Os
-#define GPIOF               ((GPIO_RegDef_t *)        0x40021400)		//General-purpose I/Os
-#define GPIOG               ((GPIO_RegDef_t *)        0x40021800)		//General-purpose I/Os
-#define GPIOH               ((GPIO_RegDef_t *)        0x40021c00)		//General-purpose I/Os
-#define GPIOI               ((GPIO_RegDef_t *)        0x40022000)		//General-purpose I/Os
-#define GPIOJ               ((GPIO_RegDef_t *)        0x40022400)		//General-purpose I/Os
-#define GPIOK               ((GPIO_RegDef_t *)        0x40022800)		//General-purpose I/Os
-#define CRC                 ((CRC_RegDef_t *)         0x40023000)		//Cryptographic processor
-#define RCC                 ((RCC_RegDef_t *)         0x40023800)		//Reset and clock control
-#define Flash               ((FLASH_RegDef_t *)       0x40023c00)		//FLASH
-#define DMA1                ((DMA_RegDef_t *)         0x40026000)		//DMA controller
-#define DMA2                ((DMA_RegDef_t *)         0x40026400)		//DMA controller
-#define Ethernet_MAC        ((Ethernet_RegDef_t *)    0x40028000)		//Ethernet: media access control      (MAC)
-#define Ethernet_MMC        ((Ethernet_RegDef_t *)    0x40028100)		//Ethernet: MAC management counters
-#define Ethernet_PTP        ((Ethernet_RegDef_t *)    0x40028700)		//Ethernet: Precision time protocol
-#define Ethernet_DMA        ((Ethernet_RegDef_t *)    0x40029000)		//Ethernet: DMA controller operation
-#define DMA2D               ((DMA2D_RegDef_t *)       0x4002b000)		//DMA2D controller
-#define OTG_HS_GLOBAL       ((USB_OTG_HS_RegDef_t *)  0x40040000)		//USB on the go high speed
-#define OTG_HS_HOST         ((USB_OTG_HS_RegDef_t *)  0x40040400)		//USB on the go high speed
-#define OTG_HS_DEVICE       ((USB_OTG_HS_RegDef_t *)  0x40040800)		//USB on the go high speed
-#define OTG_HS_PWRCLK       ((USB_OTG_HS_RegDef_t *)  0x40040e00)		//USB on the go high speed
-#define OTG_FS_GLOBAL       ((USB_OTG_FS_RegDef_t *)  0x50000000)		//USB on the go full speed
-#define OTG_FS_HOST         ((USB_OTG_FS_RegDef_t *)  0x50000400)		//USB on the go full speed
-#define OTG_FS_DEVICE       ((USB_OTG_FS_RegDef_t *)  0x50000800)		//USB on the go full speed
-#define OTG_FS_PWRCLK       ((USB_OTG_FS_RegDef_t *)  0x50000e00)		//USB on the go full speed
-#define DCMI                ((DCMI_RegDef_t *)        0x50050000)		//Digital camera interface
-#define JPEG                ((JPEG_RegDef_t *)        0x50051000)		//JPEG codec
-#define CRYP                ((CRYP_RegDef_t *)        0x50060000)		//Cryptographic processor
-#define HASH                ((HASH_RegDef_t *)        0x50060400)		//Hash processor
-#define RNG                 ((RNG_RegDef_t *)         0x50060800)		//Random number generator
-#define FMC                 ((FSMC_RegDef_t *)        0xa0000000)		//Flexible memory controller
-#define QUADSPI             ((QUADSPI_RegDef_t *)     0xa0001000)		//QuadSPI interface
-#define SCB_ACTRL           ((SCB_RegDef_t *)         0xe000e008)		//System control block ACTLR
-#define STK                 ((STK_RegDef_t *)         0xe000e010)		//SysTick timer
-#define NVIC                ((NVIC_RegDef_t *)        0xe000e100)		//Nested Vectored Interrupt      Controller
-#define SCB                 ((SCB_RegDef_t *)         0xe000ed00)		//System control block
-#define PF                  ((PF_RegDef_t *)          0xe000ed78)		//Processor features
-#define FPU_CPACR           ((FPU_RegDef_t *)         0xe000ed88)		//Floating point unit CPACR
-#define MPU                 ((MPU_RegDef_t *)         0xe000ed90)		//Memory protection unit
-#define NVIC_STIR           ((NVIC_RegDef_t *)        0xe000ef00)		//Nested vectored interrupt      controller
-#define FPU                 ((FPU_RegDef_t *)         0xe000ef34)		//Floting point unit
-#define AC                  ((AC_RegDef_t *)          0xe000ef90)		//Access control
-#define DBGMCU              ((DBGMCU_RegDef_t *)      0xe0042000)		//MCU debug component
+#define TIM2                ((TIM_RegDef_t *)         0x40000000)		// General purpose timers
+#define TIM3                ((TIM_RegDef_t *)         0x40000400)		// General purpose timers
+#define TIM4                ((TIM_RegDef_t *)         0x40000800)		// General purpose timers
+#define TIM5                ((TIM_RegDef_t *)         0x40000c00)		// General purpose timers
+#define TIM6                ((TIM_RegDef_t *)         0x40001000)		// Basic timers
+#define TIM7                ((TIM_RegDef_t *)         0x40001400)		// Basic timers
+#define TIM12               ((TIM_RegDef_t *)         0x40001800)		// General purpose timers
+#define TIM13               ((TIM_RegDef_t *)         0x40001c00)		// General-purpose-timers
+#define TIM14               ((TIM_RegDef_t *)         0x40002000)		// General-purpose-timers
+#define LPTIM1              ((LPTIM_RegDef_t *)       0x40002400)		// Low power timer
+#define RTC                 ((RTC_RegDef_t *)         0x40002800)		// Real-time clock
+#define WWDG                ((WWDG_RegDef_t *)        0x40002c00)		// Window watchdog
+#define IWDG                ((IWDG_RegDef_t *)        0x40003000)		// Independent watchdog
+#define CAN3                ((CAN_RegDef_t *)         0x40003400)		// Controller area network
+#define SPI2                ((SPI_RegDef_t *)         0x40003800)		// Serial peripheral interface
+#define SPI3                ((SPI_RegDef_t *)         0x40003c00)		// Serial peripheral interface
+#define SPDIFRX             ((SPDIF_RX_RegDef_t *)    0x40004000)		// Receiver Interface
+#define USART2              ((USART_RegDef_t *)       0x40004400)		// Universal synchronous asynchronous receiver      transmitter
+#define USART3              ((USART_RegDef_t *)       0x40004800)		// Universal synchronous asynchronous receiver      transmitter
+#define UART4               ((USART_RegDef_t *)       0x40004c00)		// Universal synchronous asynchronous receiver      transmitter
+#define UART5               ((USART_RegDef_t *)       0x40005000)		// Universal synchronous asynchronous receiver      transmitter
+#define I2C1                ((I2C_RegDef_t *)         0x40005400)		// Inter-integrated circuit
+#define I2C2                ((I2C_RegDef_t *)         0x40005800)		// Inter-integrated circuit
+#define I2C3                ((I2C_RegDef_t *)         0x40005c00)		// Inter-integrated circuit
+#define I2C4                ((I2C_RegDef_t *)         0x40006000)		// Inter-integrated circuit
+#define CAN1                ((CAN_RegDef_t *)         0x40006400)		// Controller area network
+#define CAN2                ((CAN_RegDef_t *)         0x40006800)		// Controller area network
+#define CEC                 ((CEC_RegDef_t *)         0x40006c00)		// HDMI-CEC controller
+#define PWR                 ((PWR_RegDef_t *)         0x40007000)		// Power control
+#define DAC                 ((DAC_RegDef_t *)         0x40007400)		// Digital-to-analog converter
+#define UART7               ((USART_RegDef_t *)       0x40007800)		// Universal synchronous asynchronous receiver      transmitter
+#define UART8               ((USART_RegDef_t *)       0x40007c00)		// Universal synchronous asynchronous receiver      transmitter
+#define TIM1                ((TIM_RegDef_t *)         0x40010000)		// Advanced-timers
+#define TIM8                ((TIM_RegDef_t *)         0x40010400)		// Advanced-timers
+#define USART1              ((USART_RegDef_t *)       0x40011000)		// Universal synchronous asynchronous receiver      transmitter
+#define USART6              ((USART_RegDef_t *)       0x40011400)		// Universal synchronous asynchronous receiver      transmitter
+#define SDMMC2              ((SDMMC_RegDef_t *)       0x40011c00)		// Secure digital input/output      interface
+#define ADC1                ((ADC_RegDef_t *)         0x40012000)		// Analog-to-digital converter
+#define ADC2                ((ADC_RegDef_t *)         0x40012100)		// Analog-to-digital converter
+#define ADC3                ((ADC_RegDef_t *)         0x40012200)		// Analog-to-digital converter
+#define SDMMC1              ((SDMMC_RegDef_t *)       0x40012c00)		// Secure digital input/output      interface
+#define SPI1                ((SPI_RegDef_t *)         0x40013000)		// Serial peripheral interface
+#define SPI4                ((SPI_RegDef_t *)         0x40013400)		// Serial peripheral interface
+#define SYSCFG              ((SYSCFG_RegDef_t *)      0x40013800)		// System configuration controller
+#define EXTI                ((EXTI_RegDef_t *)        0x40013c00)		// External interrupt/event      controller
+#define TIM9                ((TIM_RegDef_t *)         0x40014000)		// General purpose timers
+#define TIM10               ((TIM_RegDef_t *)         0x40014400)		// General-purpose-timers
+#define TIM11               ((TIM_RegDef_t *)         0x40014800)		// General-purpose-timers
+#define SPI5                ((SPI_RegDef_t *)         0x40015000)		// Serial peripheral interface
+#define SPI6                ((SPI_RegDef_t *)         0x40015400)		// Serial peripheral interface
+#define SAI1                ((SAI_RegDef_t *)         0x40015800)		// Serial audio interface
+#define SAI2                ((SAI_RegDef_t *)         0x40015c00)		// Serial audio interface
+#define LTCD                ((LTDC_RegDef_t *)        0x40016800)		// LCD-TFT Controller
+#define DSI                 ((DSI_RegDef_t *)         0x40016c00)		// DSI Host
+#define DFSDM               ((DFSDM_RegDef_t *)       0x40017400)		// Digital filter for sigma delta      modulators
+#define MDIOS               ((MDIOS_RegDef_t *)       0x40017800)		// Management data input/output slave
+#define GPIOA               ((GPIO_RegDef_t *)        0x40020000)		// General-purpose I/Os
+#define GPIOB               ((GPIO_RegDef_t *)        0x40020400)		// General-purpose I/Os
+#define GPIOC               ((GPIO_RegDef_t *)        0x40020800)		// General-purpose I/Os
+#define GPIOD               ((GPIO_RegDef_t *)        0x40020c00)		// General-purpose I/Os
+#define GPIOE               ((GPIO_RegDef_t *)        0x40021000)		// General-purpose I/Os
+#define GPIOF               ((GPIO_RegDef_t *)        0x40021400)		// General-purpose I/Os
+#define GPIOG               ((GPIO_RegDef_t *)        0x40021800)		// General-purpose I/Os
+#define GPIOH               ((GPIO_RegDef_t *)        0x40021c00)		// General-purpose I/Os
+#define GPIOI               ((GPIO_RegDef_t *)        0x40022000)		// General-purpose I/Os
+#define GPIOJ               ((GPIO_RegDef_t *)        0x40022400)		// General-purpose I/Os
+#define GPIOK               ((GPIO_RegDef_t *)        0x40022800)		// General-purpose I/Os
+#define CRC                 ((CRC_RegDef_t *)         0x40023000)		// Cryptographic processor
+#define RCC                 ((RCC_RegDef_t *)         0x40023800)		// Reset and clock control
+#define Flash               ((FLASH_RegDef_t *)       0x40023c00)		// FLASH
+#define DMA1                ((DMA_RegDef_t *)         0x40026000)		// DMA controller
+#define DMA2                ((DMA_RegDef_t *)         0x40026400)		// DMA controller
+#define Ethernet_MAC        ((Ethernet_RegDef_t *)    0x40028000)		// Ethernet: media access control      (MAC)
+#define Ethernet_MMC        ((Ethernet_RegDef_t *)    0x40028100)		// Ethernet: MAC management counters
+#define Ethernet_PTP        ((Ethernet_RegDef_t *)    0x40028700)		// Ethernet: Precision time protocol
+#define Ethernet_DMA        ((Ethernet_RegDef_t *)    0x40029000)		// Ethernet: DMA controller operation
+#define DMA2D               ((DMA2D_RegDef_t *)       0x4002b000)		// DMA2D controller
+#define OTG_HS_GLOBAL       ((USB_OTG_HS_RegDef_t *)  0x40040000)		// USB on the go high speed
+#define OTG_HS_HOST         ((USB_OTG_HS_RegDef_t *)  0x40040400)		// USB on the go high speed
+#define OTG_HS_DEVICE       ((USB_OTG_HS_RegDef_t *)  0x40040800)		// USB on the go high speed
+#define OTG_HS_PWRCLK       ((USB_OTG_HS_RegDef_t *)  0x40040e00)		// USB on the go high speed
+#define OTG_FS_GLOBAL       ((USB_OTG_FS_RegDef_t *)  0x50000000)		// USB on the go full speed
+#define OTG_FS_HOST         ((USB_OTG_FS_RegDef_t *)  0x50000400)		// USB on the go full speed
+#define OTG_FS_DEVICE       ((USB_OTG_FS_RegDef_t *)  0x50000800)		// USB on the go full speed
+#define OTG_FS_PWRCLK       ((USB_OTG_FS_RegDef_t *)  0x50000e00)		// USB on the go full speed
+#define DCMI                ((DCMI_RegDef_t *)        0x50050000)		// Digital camera interface
+#define JPEG                ((JPEG_RegDef_t *)        0x50051000)		// JPEG codec
+#define CRYP                ((CRYP_RegDef_t *)        0x50060000)		// Cryptographic processor
+#define HASH                ((HASH_RegDef_t *)        0x50060400)		// Hash processor
+#define RNG                 ((RNG_RegDef_t *)         0x50060800)		// Random number generator
+#define FMC                 ((FSMC_RegDef_t *)        0xa0000000)		// Flexible memory controller
+#define QUADSPI             ((QUADSPI_RegDef_t *)     0xa0001000)		// QuadSPI interface
+#define SCB_ACTRL           ((SCB_RegDef_t *)         0xe000e008)		// System control block ACTLR
+#define STK                 ((STK_RegDef_t *)         0xe000e010)		// SysTick timer
+#define NVIC                ((NVIC_RegDef_t *)        0xe000e100)		// Nested Vectored Interrupt      Controller
+#define SCB                 ((SCB_RegDef_t *)         0xe000ed00)		// System control block
+#define PF                  ((PF_RegDef_t *)          0xe000ed78)		// Processor features
+#define FPU_CPACR           ((FPU_RegDef_t *)         0xe000ed88)		// Floating point unit CPACR
+#define MPU                 ((MPU_RegDef_t *)         0xe000ed90)		// Memory protection unit
+#define NVIC_STIR           ((NVIC_RegDef_t *)        0xe000ef00)		// Nested vectored interrupt      controller
+#define FPU                 ((FPU_RegDef_t *)         0xe000ef34)		// Floting point unit
+#define AC                  ((AC_RegDef_t *)          0xe000ef90)		// Access control
+#define DBGMCU              ((DBGMCU_RegDef_t *)      0xe0042000)		// MCU debug component

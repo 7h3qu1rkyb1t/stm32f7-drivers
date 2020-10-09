@@ -127,8 +127,6 @@ void SPI_SendData(SPI_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
         // wait till txe is set
         while(!(reg->SR & _SPI_SR_TXE));
         reg->DR = *(uint16_t *)tx_buf;
-        while(!(reg->SR & _SPI_SR_RXNE));
-        *(uint16_t *)tx_buf = reg->DR;
         tx_buf+=2;
         size-=2;
     }

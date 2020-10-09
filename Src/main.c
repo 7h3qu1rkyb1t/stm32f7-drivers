@@ -2,6 +2,7 @@
 #include "string.h" 
 #include "stm32f767xx_GPIO.h"
 #include "stm32f767xx_SPI.h"
+#include "stm32f767xx_EXTI.h"
 
 void delay(){
 	for(int i = 0; i<300000; i++){
@@ -23,16 +24,6 @@ void gpio_init(){
     spi_mosi.GPIOx  = GPIOE;
     spi_nss.GPIOx   = GPIOE;
 
-    /* spi_sck.GPIOx->MODER = GPIO_OUTPUT; */
-    /* spi_miso.GPIOx->MODER = GPIO_OUTPUT; */
-    /* spi_mosi.GPIOx->MODER = GPIO_OUTPUT; */
-    /* spi_nss.GPIOx->MODER = GPIO_OUTPUT; */
-    
-    spi_sck.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
-    spi_miso.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
-    spi_mosi.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
-    spi_nss.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
-
     spi_sck.PinConfig.GPIO_PinAltMode   = AF5;
     spi_miso.PinConfig.GPIO_PinAltMode  = AF5;
     spi_mosi.PinConfig.GPIO_PinAltMode  = AF5;
@@ -48,21 +39,12 @@ void gpio_init(){
     spi_mosi.PinConfig.GPIO_OPType = GPIO_PUSHPULL;
     spi_nss.PinConfig.GPIO_OPType = GPIO_PUSHPULL;
 
-    spi_nss.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
-    spi_miso.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
-    spi_mosi.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
-    spi_sck.PinConfig.GPIO_PUPDControl = GPIO_PULL_UP;
-
-    spi_sck.PinConfig.GPIO_PinSpeed =   GPIO_VERY_HIGH_SPEED;
-    spi_miso.PinConfig.GPIO_PinSpeed =  GPIO_VERY_HIGH_SPEED;
-    spi_mosi.PinConfig.GPIO_PinSpeed =  GPIO_VERY_HIGH_SPEED;
-    spi_nss.PinConfig.GPIO_PinSpeed =   GPIO_VERY_HIGH_SPEED;
-
     RCC_GPIO_ClkCtrl(RCC_GPIOE, SET);
     GPIO_Init(&spi_sck);
     GPIO_Init(&spi_mosi);
     GPIO_Init(&spi_miso);
     GPIO_Init(&spi_nss);
+
 }
 
 void spi_init(){
@@ -70,9 +52,9 @@ void spi_init(){
     SPI_Handle_t handler;
     handler.handle = SPI4;
     handler.config.bus_config = SPI_Bus_Full_duplex;
-    handler.config.device_mode = SPI_Mode_Slave;
+    handler.config.device_mode = SPI_Mode_Master;
     // use fpclk/16 for better experience
-    handler.config.speed = SPI_pclk_div_by_8;
+    handler.config.speed = SPI_pclk_div_by_2;
     handler.config.cpha = SPI_CPHA_First;
     handler.config.cpol = SPI_CPOL_LOW;
     handler.config.ds = 8;
@@ -85,12 +67,13 @@ int main(void)
     gpio_init();
 
     spi_init();
-    char buffer[30]  ;
-    /* uint32_t size = strlen(buffer); */
+    char buffer[30] = "master is always master"  ;
+    uint32_t size = strlen(buffer);
 
 	while(1){
-		SPI_SendData(SPI4, (uint8_t *)buffer, 30);
+		SPI_SendData(SPI4, (uint8_t *)buffer, size);
 		for(int i=0; i<100000; i++);
         __asm__("nop");
 	}
 }
+
