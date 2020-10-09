@@ -2544,67 +2544,15 @@ typedef struct {
 
 // Nested Vectored Interrupt      Controller
 typedef struct {
-    volatile uint32_t ISER0;                    // Interrupt Set-Enable Register
-    volatile uint32_t ISER1;                    // Interrupt Set-Enable Register
-    volatile uint32_t ISER2;                    // Interrupt Set-Enable Register
-	uint32_t __reserved0[29];
-    volatile uint32_t ICER0;                    // Interrupt Clear-Enable Register
-    volatile uint32_t ICER1;                    // Interrupt Clear-Enable Register
-    volatile uint32_t ICER2;                    // Interrupt Clear-Enable Register
-	uint32_t __reserved1[29];
-    volatile uint32_t ISPR0;                    // Interrupt Set-Pending Register
-    volatile uint32_t ISPR1;                    // Interrupt Set-Pending Register
-    volatile uint32_t ISPR2;                    // Interrupt Set-Pending Register
-	uint32_t __reserved2[29];
-    volatile uint32_t ICPR0;                    // Interrupt Clear-Pending Register
-    volatile uint32_t ICPR1;                    // Interrupt Clear-Pending Register
-    volatile uint32_t ICPR2;                    // Interrupt Clear-Pending Register
-	uint32_t __reserved3[29];
-    volatile uint32_t IABR0;                    // Interrupt Active Bit Register
-    volatile uint32_t IABR1;                    // Interrupt Active Bit Register
-    volatile uint32_t IABR2;                    // Interrupt Active Bit Register
-	uint32_t __reserved4[61];
-    volatile uint32_t IPR0;                     // Interrupt Priority Register
-    volatile uint32_t IPR1;                     // Interrupt Priority Register
-    volatile uint32_t IPR2;                     // Interrupt Priority Register
-    volatile uint32_t IPR3;                     // Interrupt Priority Register
-    volatile uint32_t IPR4;                     // Interrupt Priority Register
-    volatile uint32_t IPR5;                     // Interrupt Priority Register
-    volatile uint32_t IPR6;                     // Interrupt Priority Register
-    volatile uint32_t IPR7;                     // Interrupt Priority Register
-    volatile uint32_t IPR8;                     // Interrupt Priority Register
-    volatile uint32_t IPR9;                     // Interrupt Priority Register
-    volatile uint32_t IPR10;                    // Interrupt Priority Register
-    volatile uint32_t IPR11;                    // Interrupt Priority Register
-    volatile uint32_t IPR12;                    // Interrupt Priority Register
-    volatile uint32_t IPR13;                    // Interrupt Priority Register
-    volatile uint32_t IPR14;                    // Interrupt Priority Register
-    volatile uint32_t IPR15;                    // Interrupt Priority Register
-    volatile uint32_t IPR16;                    // Interrupt Priority Register
-    volatile uint32_t IPR17;                    // Interrupt Priority Register
-    volatile uint32_t IPR18;                    // Interrupt Priority Register
-    volatile uint32_t IPR19;                    // Interrupt Priority Register
-    volatile uint32_t IPR20;                    // Interrupt Priority Register
-												// -840.0
-    volatile uint32_t ISER3;                    // Interrupt Set-Enable Register
-	uint32_t __reserved5[31];
-    volatile uint32_t ICER3;                    // Interrupt Clear-Enable Register
-	uint32_t __reserved6[31];
-    volatile uint32_t ISPR3;                    // Interrupt Set-Pending Register
-	uint32_t __reserved7[31];
-    volatile uint32_t ICPR3;                    // Interrupt Clear-Pending Register
-	uint32_t __reserved8[31];
-    volatile uint32_t IABR3;                    // Interrupt Active Bit Register
-	uint32_t __reserved9[81];
-    volatile uint32_t IPR21;                    // Interrupt Priority Register
-    volatile uint32_t IPR22;                    // Interrupt Priority Register
-    volatile uint32_t IPR23;                    // Interrupt Priority Register
-    volatile uint32_t IPR24;                    // Interrupt Priority Register
-    volatile uint32_t IPR25;                    // Interrupt Priority Register
-    volatile uint32_t IPR26;                    // Interrupt Priority Register
-    volatile uint32_t IPR27;                    // Interrupt Priority Register
-    volatile uint32_t IPR28;                    // Interrupt Priority Register
-    volatile uint32_t IPR29;                    // Interrupt Priority Register
+    volatile uint32_t ISER[64];                    // Interrupt Set-Enable Register
+	uint32_t __reserved0[96];
+    volatile uint32_t ICER[64];                    // Interrupt Clear-Enable Register
+	uint32_t __reserved1[96];
+    volatile uint32_t ISPR[64];                    // Interrupt Set-Pending Register
+	uint32_t __reserved2[96];
+    volatile uint32_t IABR[64];                    // Interrupt Active Bit Register
+	uint32_t __reserved3[224];
+    volatile uint32_t IPR[240];                     // Interrupt Priority Register
 } NVIC_RegDef_t;
 
 // System control block

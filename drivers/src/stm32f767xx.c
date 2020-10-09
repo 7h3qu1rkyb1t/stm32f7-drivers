@@ -25,17 +25,17 @@ void exti_init(Exti_Config_R* config){
 }
 
 void IRQ_Configure(uint8_t intr, uint8_t state, uint8_t priority){
-    /* uint8_t int_reg = intr / 32; */
-    /* uint8_t bit_offset = intr % 32; */
+    uint8_t int_reg = intr / 32;
+    uint8_t bit_offset = intr % 32;
     // set or reset interrupt
     // TODO
-    /* if (state){ */
-    /*     NVIC->NVIC_ISER[int_reg] |= (1<< bit_offset); */
-    /* } else { */
-    /*     NVIC->NVIC_ICER[int_reg] |= (1<< bit_offset); */
-    /* } */
+    if (state){
+        NVIC->ISER[int_reg] |= (1<< bit_offset);
+    } else {
+        NVIC->ICER[int_reg] |= (1<< bit_offset);
+    }
     // set priority
-    /* uint8_t prt_reg = intr / 4; */
-    /* uint8_t prt_offset = (intr % 4) * 8 + 4 ; */
-    /* NVIC->NVIC_IPR[prt_reg] |= (priority << prt_offset); */
+    uint8_t prt_reg = intr / 4;
+    uint8_t prt_offset = (intr % 4) * 8 + 4 ;
+    NVIC->IPR[prt_reg] |= (priority << prt_offset);
 }
