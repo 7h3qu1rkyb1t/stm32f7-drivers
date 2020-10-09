@@ -15,7 +15,7 @@
 #define Set_EXTI_SWIER(FLAG)                 (*<uint32_t*>0x40013c10 &= FLAG)
 #define Clr_EXTI_SWIER(FLAG)                 (*<uint32_t*>0x40013c10 |= ~FLAG)
 #define Set_EXTI_PR(FLAG)                    (*<uint32_t*>0x40013c14 &= FLAG)
-#define Clr_EXTI_PR(FLAG)                    (*<uint32_t*>0x40013c14 |= ~FLAG)
+#define Clr_EXTI_PR(FLAG)                    (*(uint32_t*)0x40013c14 |= ~FLAG)
 #define  _EXTI_IMR_MR0                                       (0x1 << 0)    // Interrupt Mask on line 0
 #define  _EXTI_IMR_MR1                                       (0x1 << 1)    // Interrupt Mask on line 1
 #define  _EXTI_IMR_MR2                                       (0x1 << 2)    // Interrupt Mask on line 2
