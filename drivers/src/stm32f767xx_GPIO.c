@@ -1,4 +1,6 @@
-#include "stm32f767xx_gpio.h"
+#include "stm32f767xx_GPIO.h"
+#include "stm32f767xx_EXTI.h"
+
 
 
 /*****************************************************************************
@@ -31,7 +33,12 @@ void GPIO_Init(GPIO_Handle_t* PinHandler){
         uint8_t AF_reg, pin_reg;
         AF_reg = PinHandler->PinConfig.GPIO_PinNumber / 8;
         pin_reg = PinHandler->PinConfig.GPIO_PinNumber %8;
-        PinHandler->GPIOx->AFRH[AF_reg] |= PinHandler->PinConfig.GPIO_PinAltMode << ( pin_reg * 4 );
+        // if pin number is more than 8 then use AFRH register otherwise AFRL
+#if AF_reg >= 8
+        PinHandler->GPIOx->AFRH |= PinHandler->PinConfig.GPIO_PinAltMode << ( pin_reg * 4 );
+#else
+        PinHandler->GPIOx->AFRL |= PinHandler->PinConfig.GPIO_PinAltMode << ( pin_reg * 4 );
+#endif
     }
 }
 
@@ -298,7 +305,8 @@ void GPIO_TogglePin(GPIO_RegDef_t* GPIOx, uint8_t pin){
  * @note        -
  *
  */
-void GPIO_IRQ_Handler(uint8_t PinNum){
-    EXTI->EXTI_PR |= (1<<PinNum);
+void GPIO_IRQ_Handler(uint8_t intr_num){
+    /* EXTI-> |= (1<<PinNum); */
+    Clr_EXTI_PR(intr_num);
 }
 

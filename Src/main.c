@@ -1,7 +1,7 @@
 #include "stm32f767xx.h" 
 #include "string.h" 
-#include "stm32f767xx_gpio.h"
-#include "stm32f767xx_spi.h"
+#include "stm32f767xx_GPIO.h"
+#include "stm32f767xx_SPI.h"
 
 void delay(){
 	for(int i = 0; i<300000; i++){
@@ -23,10 +23,10 @@ void gpio_init(){
     spi_mosi.GPIOx  = GPIOE;
     spi_nss.GPIOx   = GPIOE;
 
-    spi_sck.GPIOx->MODER = GPIO_OUTPUT;
-    spi_miso.GPIOx->MODER = GPIO_OUTPUT;
-    spi_mosi.GPIOx->MODER = GPIO_OUTPUT;
-    spi_nss.GPIOx->MODER = GPIO_OUTPUT;
+    /* spi_sck.GPIOx->MODER = GPIO_OUTPUT; */
+    /* spi_miso.GPIOx->MODER = GPIO_OUTPUT; */
+    /* spi_mosi.GPIOx->MODER = GPIO_OUTPUT; */
+    /* spi_nss.GPIOx->MODER = GPIO_OUTPUT; */
     
     spi_sck.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
     spi_miso.PinConfig.GPIO_PinMode = GPIO_ALTERNATE_FUNCTION;
@@ -70,9 +70,9 @@ void spi_init(){
     SPI_Handle_t handler;
     handler.handle = SPI4;
     handler.config.bus_config = SPI_Bus_Full_duplex;
-    handler.config.device_mode = SPI_Mode_Master;
+    handler.config.device_mode = SPI_Mode_Slave;
     // use fpclk/16 for better experience
-    handler.config.speed = SPI_pclk_div_by_16;
+    handler.config.speed = SPI_pclk_div_by_8;
     handler.config.cpha = SPI_CPHA_First;
     handler.config.cpol = SPI_CPOL_LOW;
     handler.config.ds = 8;
@@ -85,11 +85,11 @@ int main(void)
     gpio_init();
 
     spi_init();
-    char buffer[] = "H";
-    uint32_t size = strlen(buffer);
+    char buffer[30]  ;
+    /* uint32_t size = strlen(buffer); */
 
 	while(1){
-		SPI_SendData(SPI4, (uint8_t *)buffer, size);
+		SPI_SendData(SPI4, (uint8_t *)buffer, 30);
 		for(int i=0; i<100000; i++);
         __asm__("nop");
 	}
