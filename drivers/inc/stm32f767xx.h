@@ -1,9 +1,6 @@
 #pragma once
 #include<stdint.h>
-typedef enum {
-    false,
-    true
-} bool;
+#include"lib.h"
 // General purpose timers
 typedef struct {
     volatile uint32_t CR1;                      // control register 1
@@ -2684,6 +2681,7 @@ typedef struct {
 void exti_init(Exti_Config_R * config);
 
 // state SET or RESET. priority 4 bits value. lower the num higher priority
+// priority 1-16
 void IRQ_Configure(uint8_t intr, uint8_t state, uint8_t priority);
 #define TIM2                ((TIM_RegDef_t *)         0x40000000)		// General purpose timers
 #define TIM3                ((TIM_RegDef_t *)         0x40000400)		// General purpose timers

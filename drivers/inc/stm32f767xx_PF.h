@@ -1,12 +1,12 @@
-#define Get_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 |= FLAG)
-#define Get_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c |= FLAG)
-#define Get_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 |= FLAG)
-#define Set_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 &= FLAG)
-#define Clr_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 |= ~FLAG)
-#define Set_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c &= FLAG)
-#define Clr_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c |= ~FLAG)
-#define Set_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 &= FLAG)
-#define Clr_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 |= ~FLAG)
+#define Get_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 & FLAG)
+#define Get_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c & FLAG)
+#define Get_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 & FLAG)
+#define Set_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 |= FLAG)
+#define Clr_PF_CLIDR(FLAG)                   (*(uint32_t*)0xe000ed78 &= ~FLAG)
+#define Set_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c |= FLAG)
+#define Clr_PF_CTR(FLAG)                     (*(uint32_t*)0xe000ed7c &= ~FLAG)
+#define Set_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 |= FLAG)
+#define Clr_PF_CCSIDR(FLAG)                  (*(uint32_t*)0xe000ed80 &= ~FLAG)
 #define  _PF_CLIDR_CL1                                       (0x7 << 0)    // CL1
 #define  _PF_CLIDR_CL2                                       (0x7 << 3)    // CL2
 #define  _PF_CLIDR_CL3                                       (0x7 << 6)    // CL3

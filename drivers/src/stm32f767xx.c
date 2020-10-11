@@ -37,5 +37,7 @@ void IRQ_Configure(uint8_t intr, uint8_t state, uint8_t priority){
     // set priority
     uint8_t prt_reg = intr / 4;
     uint8_t prt_offset = (intr % 4) * 8 + 4 ;
-    NVIC->IPR[prt_reg] |= (priority << prt_offset);
+    if (priority){
+        NVIC->IPR[prt_reg] |= (((priority - 1 )& 0xf )<< prt_offset);
+    }
 }
