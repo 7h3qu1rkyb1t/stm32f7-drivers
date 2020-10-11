@@ -21,7 +21,11 @@ CBuff spi_recieve_buf = { buffer, 0,0, 256 };
  */
 
 void gpio_init(){
-    GPIO_Handle_t spi_sck, spi_mosi, spi_miso, spi_nss;
+    GPIO_Handle_t spi_sck, spi_mosi, spi_miso, spi_nss, led;
+    led.PinConfig.GPIO_PinMode = GPIO_OUTPUT;
+    led.PinConfig.GPIO_PinNumber = 7;
+    led.PinConfig.GPIO_OPType = GPIO_PUSHPULL;
+    led.GPIOx = GPIOB;
     spi_sck.GPIOx   = GPIOE;
     spi_miso.GPIOx  = GPIOE;
     spi_mosi.GPIOx  = GPIOE;
@@ -48,6 +52,7 @@ void gpio_init(){
 
     RCC_GPIO_ClkCtrl(RCC_GPIOE, SET);
     RCC_GPIO_ClkCtrl(RCC_GPIOB, SET);
+    GPIO_Init(&led);
     GPIO_Init(&spi_sck);
     GPIO_Init(&spi_mosi);
     GPIO_Init(&spi_miso);
@@ -77,12 +82,13 @@ int main(void)
     gpio_init();
 
     spi_init();
+    Set_SPI4_CR1(_SPI_CR1_SPE);
     char send_buffer[30] = "master is always master"  ;
     uint32_t size = strlen(send_buffer);
 
 	while(1){
-		SPI_SendData(SPI4, (uint8_t *)send_buffer, size);
-		for(int i=0; i<100000; i++);
+        /* SPI_SendData(SPI4, (uint8_t *)send_buffer, size); */
+        /* delay(); */
         __asm__("nop");
 	}
 }

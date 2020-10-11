@@ -8,6 +8,8 @@ void SPI_Init(SPI_Handle_t* pin_handler){
     if (pin_handler->config.device_mode ){
         tmp_reg1 |= _SPI_CR1_MSTR;
         tmp_reg2 |= _SPI_CR2_SSOE;
+    } else {
+        SPI_Config(*pin_handler, SET);
     }
     if (pin_handler->config.ssm){
         tmp_reg1 |= _SPI_CR1_SSM;                                       // software slave management bit set
@@ -122,7 +124,7 @@ void RCC_SPI_ClkCtrl(SPI_Interfaces interface, uint8_t state){
 // Data send and recieve
 void SPI_SendData(SPI_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
     // chek the buf if empty exit
-    SPI_Control(SPI4, SET);
+    /* SPI_Control(SPI4, SET); */
     while(size>1){
         // wait till txe is set
         while(!(reg->SR & _SPI_SR_TXE));
@@ -137,11 +139,11 @@ void SPI_SendData(SPI_RegDef_t* reg, uint8_t* tx_buf, uint32_t size){
     }
 
     while( SPI_Status(SPI4, SPI_Status_BSY) );
-    SPI_Control(SPI4, RESET);
+    /* SPI_Control(SPI4, RESET); */
 }
 void SPI_ReceiveData(SPI_RegDef_t* reg, uint8_t* rx_buf, uint32_t size){
     // chek the buf if empty exit
-    SPI_Control(SPI4, SET);
+    /* SPI_Control(SPI4, SET); */
     while(size>0){
         // wait till txe is set
         if (reg->CR1 & _SPI_CR1_MSTR){
@@ -154,7 +156,7 @@ void SPI_ReceiveData(SPI_RegDef_t* reg, uint8_t* rx_buf, uint32_t size){
         size-=2;
     }
     while( SPI_Status(SPI4, SPI_Status_BSY) );
-    SPI_Control(SPI4, RESET);
+    /* SPI_Control(SPI4, RESET); */
 }
 
 
