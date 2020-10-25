@@ -1,7 +1,7 @@
 #include "lib.h"
 #include "stm32f767xx.h"
 #include "stm32f767xx_RCC.h"
-#include "math.h""
+#include "math.h"
 
 #define Get_I2C1_CR1(FLAG)                   (*(uint32_t*)0x40005400 & FLAG)
 #define Get_I2C1_CR2(FLAG)                   (*(uint32_t*)0x40005404 & FLAG)
