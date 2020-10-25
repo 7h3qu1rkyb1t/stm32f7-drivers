@@ -207,7 +207,7 @@ typedef struct {
     volatile uint32_t OAR1;                     // Own address register 1
     volatile uint32_t OAR2;                     // Own address register 2
     volatile uint32_t TIMINGR;                  // Timing register
-    volatile uint32_t TIMEOUTR;                 // Status register 1
+    volatile uint32_t TIMEOUTR;                 // Timeout register
     volatile uint32_t ISR;                      // Interrupt and Status register
     volatile uint32_t ICR;                      // Interrupt clear register
     volatile uint32_t PECR;                     // PEC register
@@ -2786,3 +2786,5 @@ void IRQ_Configure(uint8_t intr, uint8_t state, uint8_t priority);
 #define FPU                 ((FPU_RegDef_t *)         0xe000ef34)		// Floting point unit
 #define AC                  ((AC_RegDef_t *)          0xe000ef90)		// Access control
 #define DBGMCU              ((DBGMCU_RegDef_t *)      0xe0042000)		// MCU debug component
+
+#define _Gen_Exception()    ((uint32_t)0 = 0xdeadbeef)

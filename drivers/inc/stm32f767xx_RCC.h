@@ -1,3 +1,4 @@
+#pragma once
 #define Get_RCC_CR(FLAG)                     (*(uint32_t*)0x40023800 & FLAG)
 #define Get_RCC_PLLCFGR(FLAG)                (*(uint32_t*)0x40023804 & FLAG)
 #define Get_RCC_CFGR(FLAG)                   (*(uint32_t*)0x40023808 & FLAG)
